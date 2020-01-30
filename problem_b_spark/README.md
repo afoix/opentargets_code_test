@@ -23,7 +23,7 @@ It uses a Spark pipeline which:
 * Creates a CSV line
 * Writes the CSV line to the result
 
-Progress information is displayed on stderr, while the end results will be written to the CSV file. The CSV output for the test data provided is [available here](https://drive.google.com/file/d/1U9D3vDoLYzXNpUzJbeu2C18cCX4qgWI6/view?usp=sharing).
+Progress information is displayed on stderr, while the end results will be written to the CSV file. The CSV output for the test data provided is [available here](https://drive.google.com/open?id=1g5kBj5vSAJn6D3Mm_PEtP4kiL2szd3cj).
 
 ## Part 2 - compute target-target pairs
 
