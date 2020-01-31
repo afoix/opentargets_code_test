@@ -23,23 +23,12 @@ It uses a Spark pipeline which:
 * Creates a CSV line
 * Writes the CSV line to the result
 
-Progress information is displayed on stderr, while the end results will be written to the CSV file. The CSV output for the test data provided is [available here](https://drive.google.com/open?id=1g5kBj5vSAJn6D3Mm_PEtP4kiL2szd3cj).
-
 ## Part 2 - compute target-target pairs
 
 The second part of the tool computes the number of target-target pairs in the input data which have two or more diseases in common. The final count is written to standard output.
 
 Run it like this:
 
-> `spark-submit part1.py --input path/to/input.json.gz`
+> `spark-submit --driver-memory 16g --conf spark.driver.maxResultSize=2g part2.py --input path/to/input.json.gz`
 
-The tool uses a Spark pipeline which:
-
-* Reads lines from the input file
-* Parses the JSON and extracts the target ID and disease ID
-* Groups results by disease ID
-* Discards diseases which only have one target, because that means the disease cannot be in common
-* For each disease, generates a (target, target) pair for all targets associated with that disease
-* Counts how many times every (target, target) pair is seen
-* Discards pairs which were only seen once
-* Counts the remaining pairs and displays the result
+The tool uses Spark DataFrames to compute the result. It will run on your local machine and use all available cores.
