@@ -12,14 +12,13 @@ args = parser.parse_args()
 inputUri = pathlib.Path(args.input).resolve().as_uri()
 
 df = spark.read.json(inputUri)
-df = df.select(df.disease.id.alias('disease'), df.target.id.alias('target'))
+df = df.select(df.disease.id.alias('disease'), df.target.id.alias('target')).distinct()
 df = df.repartition('disease')
 
-targetPairs = df.alias("a").join(df.alias("b"), F.col("a.disease") == F.col("b.disease")) \
-  .filter(F.col("a.target") < F.col("b.target")) \
-  .repartition(F.col('a.target')) \
-  .groupBy(F.col("a.target"), F.col("b.target")).count() \
-  .filter(F.col("count") > 1) \
-  .count()
+df = df.alias("a").join(df.alias("b"), (F.col("a.disease") == F.col("b.disease")) & (F.col("a.target") < F.col("b.target"))) \
+       .select(F.col("a.target"), F.col("b.target")) \
+       .repartition(F.col('a.target')) \
+       .groupBy(F.col("a.target"), F.col("b.target")).count() \
+       .filter(F.col("count") > 1)
 
-print (targetPairs)
+print (df.count())
