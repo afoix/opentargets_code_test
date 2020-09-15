@@ -4,6 +4,7 @@ These are my solutions to the two problems in the OpenTargets take-home coding t
 
 Both solutions are in Python and require Python 3.8.
 
+The solution must be in Scala
 
 [Solution to Problem A](problem_a/)
 
