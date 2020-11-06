@@ -2,7 +2,7 @@
 
 These are my solutions to the two problems in the OpenTargets take-home coding test. 
 
-Both solutions are in Python and require Python 3.8.
+Both solutions are in Python and require Python 3.8
 
 The solution must be in Scala
 
